@@ -12,9 +12,11 @@ class FileStorage:
         """Returns a dictionary of models currently in storage"""
         if not cls:
             return FileStorage.__objects
-        for k, v in self.__objects:
-            if k.split('.') [0] == cls:
-                new_list.append(k, v)
+        d = dict()
+        for k in self.__objects:
+            if k.split('.') [0] == cls.__name__:
+                d[k] = self.__objects[k]
+        return d
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -31,11 +33,13 @@ class FileStorage:
 
     def delete(self, obj=None):
         """Deletes obj from __objects"""
-        if not obj:
+        if obj is not None:
+            for k, v in self.__objects.items():
+                if obj == v:
+                    break
+            self.__objects.pop(k)
+        else:
             return
-        for k, v in self.__objects.items():
-            if obj == v:
-                del v
 
 
 
