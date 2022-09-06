@@ -28,9 +28,8 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
 
-@app.route("/python")
-@app.route("/python/")
+@app.route("/python/", defaults={'text': "is cool"})
 @app.route("/python/<text>", strict_slashes=False)
-def python(text="is cool"):
+def python(text):
     """display "Python" followed by value of text variable"""
     return "Python {}".format(text.replace("_", " "))
