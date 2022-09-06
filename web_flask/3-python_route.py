@@ -24,12 +24,14 @@ def C(text):
     """display "C" followed by value of text variable"""
     return "C {}".format(text.replace("_", " "))
 
+
+@app.route("/python/")
+@app.route("/python/<text>", strict_slashes=False)
+def python(text="is cool"):
+    """display "Python" followed by value of text variable"""
+    return "Python {}".format(text.replace("_", " "))
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
-
-@app.route("/python/", defaults={'text': "is cool"})
-@app.route("/python/<text>", strict_slashes=False)
-def python(text):
-    """display "Python" followed by value of text variable"""
-    return "Python {}".format(text.replace("_", " "))
