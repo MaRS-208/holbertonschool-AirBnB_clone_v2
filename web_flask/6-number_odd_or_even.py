@@ -3,7 +3,7 @@
 
 
 from flask import Flask
-
+from flask import render_template
 app = Flask(__name__)
 
 
@@ -42,6 +42,16 @@ def number(n):
 def num_tem(n):
     """display HTML page only if n is an integer"""
     return num_tem("5-number.html", n=n)
+
+
+@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
+def num_odd_eve(n):
+    """display a HTML page only if n is an integer"""
+    if (n % 2) == 0:
+        noe = "even"
+    else:
+        noe = "odd"
+    return render_template("6-number_odd_or_even.html", number=n, noe=noe)
 
 
 if __name__ == '__main__':
